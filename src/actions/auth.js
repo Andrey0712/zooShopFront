@@ -4,7 +4,7 @@ import { REGISTER, REGISTER_BEGIN,
 } from "../constants/actionTypes";
 import setAuthorizationToken from '../Utils/setAuthorizationToken';
 import jwt from "jsonwebtoken";
-//import { getCartUser } from "./cart";
+import { getCartUser } from "./cart";
 
 
 //import { useHistory } from "react-router-dom";
@@ -70,7 +70,7 @@ export const authUser = (token) => (dispatch) => {
     var user = jwt.decode(token);
     setAuthorizationToken(token);
     dispatch({type: LOGIN, payload: user});
-    //dispatch(getCartUser());
+    dispatch(getCartUser());
 }
 
 

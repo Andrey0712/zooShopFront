@@ -16,7 +16,7 @@
     "jsonwebtoken": "^8.5.1",
     "primeflex": "^2.0.0",
     "primeicons": "^5.0.0",
-    "primereact": "^7.0.0",
+    "primereact": "^7.2.1",
     "prop-types": "^15.7.2",
     "react": "^17.0.2",
     "react-bootstrap": "^2.4.0",

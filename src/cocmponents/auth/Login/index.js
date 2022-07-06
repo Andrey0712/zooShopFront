@@ -95,7 +95,8 @@ const LoginPage = () => {
 
     return (
         <div className="row">
-            <div className="offset-md-3 col-md-6">
+            <div className="offset-md-3 col-md-5">
+            <br/>
                 <h1 ref={titleRef} className="text-center">Вхід на сайт</h1>
                 {invalid && invalid.length > 0 &&
                     <div className="alert alert-danger">
@@ -131,10 +132,13 @@ const LoginPage = () => {
                             name="password"
                             type="password"
                         />
-                        <input type="submit" className="btn btn-success" value="Вхід"></input>
-                        <br/><br/>
+                        <div className="d-grid gap-2 d-md-flex justify-content-md-end">
+                            <input type="submit" className="btn btn-primary" value="Вхід"></input>
+                        </div>
+                        
+                        <hr/>
                         <h1 ref={titleRef} className="text-center">Вхід на сайт через Google</h1>
-                        <br/>
+                        
                         <GoogleLogin className="col-3 mx-auto justify-md-end d-md-flex"
                     clientId="523681892685-p9t6c2i45qb6p3qnpu6aom6lqdi9ln9r.apps.googleusercontent.com"
                     //clientId="436528464037-jt21etpk10kglcd0fllsua18g18tc9ul.apps.googleusercontent.com"

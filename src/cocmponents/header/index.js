@@ -55,17 +55,18 @@ const Header = () => {
                         </Nav>
                         :
                         <Nav onClick={() => setNavExpanded(false)}>
-                            {/* <Link className="nav-link" to="/cart">
+                            <Link className="nav-link" to="/cart">
                                 <i className="pi pi-shopping-cart" style={{ fontSize: "2rem" }}></i>
                                 {cart.count}
-                            </Link> */}
+                            </Link>
                             <Link className="nav-link" to="/profile">{auth.user.name}</Link>
                             <Link className="nav-link" to="/logout" onClick={onClickLogout}>Вихід</Link>
                         </Nav>
                     }
                 </Navbar.Collapse>
-            </Container>
+            </Container> 
         </Navbar>
+       
     )
 }
 
