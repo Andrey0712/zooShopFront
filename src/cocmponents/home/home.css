@@ -2,7 +2,12 @@
     width: 14rem;
     font-weight: normal;
 }
-
+/* .dataview-demo .pi pi-search {
+    margin-top: 2px;
+} */
+.dataview-demo {
+    margin-top: 20px;
+}
 .dataview-demo .product-name {
     font-size: 1.5rem;
     font-weight: 700;

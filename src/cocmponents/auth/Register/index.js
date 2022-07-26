@@ -82,7 +82,7 @@ const RegisterPage = () => {
       }
 
     const onSubmitHandler = async (values) => {
-
+        console.log("erіувапролд");
         console.log("errors", errors);
         try {            
             const formData = new FormData();

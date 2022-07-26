@@ -1,31 +1,43 @@
-
 import React, {useRef,useState} from 'react'
 import { Formik, Form } from 'formik'
 import MyTextInput from '../../common/MyTextInput'
 import { useDispatch } from 'react-redux';
-import validate from './validation'
+import validate from '../RegisterProduct/validation'
 import { useSelector } from 'react-redux'
 import MyPhotoInput from '../../common/MyPhotoInput';
 import EclipseWidget from '../../common/louding';
 import {push} from 'connected-react-router';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css'
-import { RegisterProd } from '../../../actions/RegisterProduct';
+import { EditProd } from '../../../actions/RegisterProduct';
+import {urlBackend} from '../../../http_common';
 
 
 toast.configure();
 
 
-const RegisterProduct = () => {
+const EditProduct = ( ) => {
 
+    var url = new URL(window.location.href);
+    const productId = url.searchParams.get("id")
+        
+    console.log("Id current prod:", productId);
+    const {list}=useSelector(res=>res.prod);
+    
+    //find user for delete from id.
+    const current=list.find(prod=>prod.id==productId);
+    console.log( "current:", current);
+    
     const initState = {
-        name: '',
-        startPhoto: null,
-        description: '',
-        categoryId: null,
-        price: null,
+        id:productId,
+        name: current.name,
+        startPhoto: "http://localhost:5000/"+current.image,
+        //startPhoto: null,
+        description: current.description,
+        //categoryId: current.category,
+        price: current.price,
         //quantity: 0,
-        rating: null
+        rating: current.rating
         
 
     }
@@ -42,15 +54,16 @@ const onSubmitHandler = async (values) => {
     
     console.log("errors", errors);
     try {            
-        const formData = new FormData();
-        Object.entries(values).forEach(([key, value]) => formData.append(key, value));
+        const formData1 = new FormData();
+        Object.entries(values).forEach(([key, value]) => formData1.append(key, value));
                      setLoading(true);
-                     console.log("register reuslt", formData);
-             dispatch(RegisterProd(formData))
-                 .then(result => {
-                    
+                     console.log("result", {formData1});
+             dispatch(EditProd(formData1))
+                .then(result => {
+                    console.log("edit complete--------------");
+                    //console.log("update ok");
                      setLoading(false);
-                     toast.warn ("Продукт зареєстровано",{position: toast.POSITION.BOTTOM_RIGHT,autoClose:3000});
+                     toast.warn ("Продукт відредаговано",{position: toast.POSITION.BOTTOM_RIGHT,autoClose:3000});
                                      
                     dispatch(push("/admin"));
             })
@@ -77,7 +90,7 @@ return (
     
     <div className="row">
         <div className="offset-md-3 col-md-6">
-            <h1 ref={titleRef} className="text-center" >Реєстрація</h1>
+            <h1 ref={titleRef} className="text-center" >Редагуваня продукту</h1>
             {invalid && invalid.length>0 &&
                 <div className="alert alert-danger">
                     <ul>
@@ -96,7 +109,7 @@ return (
             <Formik
                 innerRef = {refFormik}
                 initialValues={initState}
-                validationSchema={validate()}
+                //validationSchema={validate()}
                 onSubmit={onSubmitHandler}
             >
                 <Form>
@@ -108,7 +121,8 @@ return (
 
                         <MyPhotoInput 
                             refFormik={refFormik}
-                            field="startPhoto" />
+                            field="startPhoto"
+                            image={initState.startPhoto} />
 
                     <MyTextInput
                         label="Ціна"
@@ -122,11 +136,11 @@ return (
                         id="description"
                         type="text" />
 
-                    <MyTextInput
+                    {/* <MyTextInput
                         label="Категорія"
                         name="categoryId" 
                         id="categoryId"
-                        type="text" />
+                        type="text" /> */}
                     
                     
                     <MyTextInput
@@ -136,7 +150,7 @@ return (
                         type="text"/>
 
                         <div className="d-grid gap-2 d-md-flex justify-content-md-end">
-                            <button type="submit" className="btn btn-primary">Реєстрація продукта</button>
+                            <button type="submit" className="btn btn-primary">Редагуваня продукта</button>
                         </div>
                     
                 </Form>
@@ -148,5 +162,4 @@ return (
 )
 }
 
-export default RegisterProduct;
-
+export default EditProduct;

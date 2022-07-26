@@ -1,4 +1,7 @@
-import { PRODUCT_LIST,REGISTER_PRODUCTS } from "../constants/actionTypes";
+import { PRODUCT_LIST,REGISTER_PRODUCTS,
+    UPDATE_PRODUCTS,
+    DELL_PRODUCTS 
+} from "../constants/actionTypes";
 
 
 const initialState = {
@@ -23,6 +26,19 @@ function productReducer(state  = initialState, action) {
                     
                 }
             }
+            case UPDATE_PRODUCTS:
+            {
+                state = [
+                    state.map((element) => element.items.filter((item) => item.id !== action.payload.id)),
+                  ];
+                  return state;
+            }
+             case DELL_PRODUCTS:
+                return {
+                    ...state,
+                    list: state.filter((el) => el.id !== action.payload),
+                    
+                  };
         default: 
             return state ;
     }

@@ -9,12 +9,15 @@
 
 // const HomePage = () => {
 //         const dispatch = useDispatch();
+
 //      const { list } = useSelector(state => state.prod);
+
 //          useEffect(()=>
 //     {
 //         dispatch(getProduct());
 //         console.log("Request to server");
 //     },[]);
+
 //     console.log("Render component users")
 //         return(
             
@@ -51,35 +54,53 @@
 // }
 //  export default HomePage
 
+
+
+
+
 import React, {useState, useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { DataView, DataViewLayoutOptions } from 'primereact/dataview';
 import { Button } from 'primereact/button';
-import { Dropdown } from 'primereact/dropdown';
+//import { Dropdown } from 'primereact/dropdown';
 import { Rating } from 'primereact/rating';
 import './home.css';
-import { getProduct } from '../../actions/products';
+import { getProduct, getProductByCategory, getProductSearch} from '../../actions/products';
 import { AddCartProduct } from '../../actions/cart';
 import EclipseWidget from '../common/eclipse';
 import CartDialog from './cartDialog';
 import { Dialog } from 'primereact/dialog';
 import {urlBackend} from '../../http_common';
+import { InputText } from 'primereact/inputtext';
+import { MultiSelect } from 'primereact/multiselect';
+import { SelectButton } from 'primereact/selectbutton';
+
 
 const HomePage = () => {
 
     const dispatch = useDispatch();
     const { list } = useSelector(state => state.prod);
 
+    const [value3, setValue3] = useState('');
     const[visible,setVisible]=useState(false);
     const [layout, setLayout] = useState('grid');
-    const [sortKey, setSortKey] = useState(null);
-    const [sortOrder, setSortOrder] = useState(null);
-    const [sortField, setSortField] = useState(null);
-    const sortOptions = [
-        {label: 'Price High to Low', value: '!price'},
-        {label: 'Price Low to High', value: 'price'},
-    ];
+
+    //const [sortKey, setSortKey] = useState(null);
+    // const [sortOrder, setSortOrder] = useState(null);
+    // const [sortField, setSortField] = useState(null);
+    // const sortOptions = [
+    //     {label: 'Price High to Low', value: '!price'},
+    //     {label: 'Price Low to High', value: 'price'},
+    // ];
+
+    const [selected, setSelected] = useState(null);
     const [loading, setLoading] = useState(true);
+
+    
+    const category = ['Корм', 'Вітаміни','Іграшки','Ветеринарні препарати'];
+
+    
+    
 
     useEffect(() => {
         try {
@@ -96,6 +117,8 @@ const HomePage = () => {
             console.log("Server is bad register from", error);
         } 
     }, []);
+
+    
 
     const onClickAddToCart =(e, id) => {
         e.preventDefault();
@@ -118,21 +141,62 @@ const HomePage = () => {
 
     }
 
+    
 
-    const onSortChange = (event) => {
-        const value = event.value;
+    const onSearchChange =(e) => {
+        e.preventDefault();
+        setValue3(e.target.value);
+        try {            
+            var data = {
+                product: e.target.value,
+                
+            }
+            //console.log({data},"fffff")
+            dispatch(getProductSearch(data))
+            
+                .then(() => {
+                    setLoading(false);
+                    //console.log("Add to cart competed!");
+                })
+                .catch(ex => {
+                    setLoading(false);
+                });
+                
+        }
+        catch (error) {
+            console.log("Server is bad register from", error);
+        }
 
-        if (value.indexOf('!') === 0) {
-            setSortOrder(-1);
-            setSortField(value.substring(1, value.length));
-            setSortKey(value);
-        }
-        else {
-            setSortOrder(1);
-            setSortField(value);
-            setSortKey(value);
-        }
     }
+
+    const onChangeCategory =(e) => {
+        e.preventDefault();
+        setSelected(e.value);
+        try { 
+            // var rez= e.target.value[0].name;  
+            // console.log({rez}) 
+            var data = {
+                product: e.value,
+                
+            }
+            console.log({data},"ffff")
+            dispatch(getProductByCategory(data))
+            
+                .then(() => {
+                    setLoading(false);
+                    //console.log("Add to cart competed!");
+                })
+                .catch(ex => {
+                    setLoading(false);
+                });
+                
+        }
+        catch (error) {
+            console.log("Server is bad register from", error);
+        }
+
+    }
+
 
     const renderListItem = (data) => {
         return (
@@ -158,11 +222,13 @@ const HomePage = () => {
                     </div>
                 </div>
             </div>
+            
         );
     }
 
     const renderGridItem = (data) => {
         return (
+           
             <div className="p-col-12 p-md-4">
                 <div className="product-grid-item card">
                     <div className="product-grid-item-top">
@@ -202,11 +268,32 @@ const HomePage = () => {
 
     const renderHeader = () => {
         return (
-            <div className="p-grid p-nogutter">
-                <div className="p-col-6" style={{textAlign: 'left'}}>
-                    <Dropdown options={sortOptions} value={sortKey} optionLabel="label" placeholder="Sort By Price" onChange={onSortChange}/>
+            <div className="p-grid p-nogutter" >
+                <div className="p-col-3" style={{textAlign: 'left'}} >
+
+                <span className="p-input-icon-left">
+                    <i className="pi pi-search" />
+                     {/* <InputText value={value3} onChange={(e) => setValue3(e.target.value)} placeholder="Search" /> */}
+                     <InputText type="search" value={value3} onChange={onSearchChange} placeholder="Пошук" />
+                </span>
                 </div>
-                <div className="p-col-6" style={{textAlign: 'right'}}>
+
+                <div className="p-col-7" style={{textAlign: 'left'}}>
+                    {/* <Dropdown options={sortOptions} value={sortKey} optionLabel="label" placeholder="Sort By Price" onChange={onSortChange}/>
+                <br/><br/> */}
+                <SelectButton value={selected} options={category} onChange={(e) => onChangeCategory(e)} />
+                {/* <MultiSelect value={selected} options={category} 
+                // onChange={(e) => setSelected(e.value)}
+                onChange={(e) =>onChangeCategory(e)}
+                 //optionLabel="name" 
+                 placeholder="Категорія" 
+                 display="chip" 
+                 //maxSelectedLabels={2}
+                 /> */}
+            </div>
+           
+               
+                <div className="p-col-2" style={{textAlign: 'right'}}>
                     <DataViewLayoutOptions layout={layout} onChange={(e) => setLayout(e.value)} />
                 </div>
             </div>
@@ -230,13 +317,17 @@ const HomePage = () => {
                 <div className="card">
                     <DataView value={list} layout={layout} header={header}
                         itemTemplate={itemTemplate} paginator rows={6}
-                        sortOrder={sortOrder} sortField={sortField} />
+                       
+                         />
                 </div>
             </div>
 
             {loading && <EclipseWidget/>}
         </>
     )
+    
 }
 
+
 export default HomePage
+

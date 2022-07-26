@@ -1,7 +1,13 @@
 import cartService from "../services/cart.service";
-import { CART_ADD_PRODUCT, CART_LOAD_PRODUCT,CART_PLUS_PRODUCT,CART_MINUS_PRODUCT } from "../constants/actionTypes";
+import { CART_ADD_PRODUCT, CART_LOAD_PRODUCT,CART_PLUS_PRODUCT,CART_MINUS_PRODUCT,
+    CART_DEL_ITEM_PRODUCT 
+} from "../constants/actionTypes";
+
+
+
 
 export const AddCartProduct = (product) => async (dispatch) => {
+   
     try {
         const {data} = await cartService.add(product);
         // const data = {
@@ -13,6 +19,7 @@ export const AddCartProduct = (product) => async (dispatch) => {
         // };
         dispatch({type: CART_ADD_PRODUCT, payload: data});
         return Promise.resolve();
+        
         
     }
     catch(err) {
@@ -30,10 +37,7 @@ export const getCartUser = () => async (dispatch) => {
 export const PlusProd = (product) => async (dispatch) => {
     try {
         const {data} = await cartService.plus(product.productId);
-        // const data = {
-        //     id: product.productId
-            
-        // };
+        
         dispatch({type: CART_PLUS_PRODUCT, payload: data});
         return Promise.resolve();
         
@@ -46,7 +50,7 @@ export const PlusProd = (product) => async (dispatch) => {
 
 export const MinusProduct = (product) => async (dispatch) => {
     try {
-        const {data} = await cartService.minus(product);
+        const {data} = await cartService.minus(product.productId);
         
         dispatch({type: CART_MINUS_PRODUCT, payload: data});
         return Promise.resolve();
@@ -57,3 +61,17 @@ export const MinusProduct = (product) => async (dispatch) => {
         return Promise.reject(data);
     }
 }
+
+// export const Del_Item_Product = (product) => async (dispatch) => {
+//     try {
+//         const {data} = await cartService.del_cartProd(product.productId);
+        
+//         dispatch({type: CART_DEL_ITEM_PRODUCT, payload: data});
+//         return Promise.resolve();
+        
+//     }
+//     catch(err) {
+//         const {data} = err.response;
+//         return Promise.reject(data);
+//     }
+// }
