@@ -5,8 +5,9 @@ class UsersService {
         return http.get("api/account/users");
     }
     del_user(data){
+        console.log("service", data.user.id);
         return http
-            .post("api/account/delete", data);
+            .post("api/account/delete", data.user.id);
     } 
     edit(data) {
         return http.post("api/account/edit", data, {
