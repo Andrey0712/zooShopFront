@@ -3,6 +3,9 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@fortawesome/fontawesome-svg-core": "^6.1.2",
+    "@fortawesome/free-brands-svg-icons": "^6.1.2",
+    "@fortawesome/react-fontawesome": "^0.2.0",
     "@testing-library/jest-dom": "^5.14.1",
     "@testing-library/react": "^11.2.7",
     "@testing-library/user-event": "^12.8.3",
@@ -16,6 +19,8 @@
     "jsonwebtoken": "^8.5.1",
     "jspdf": "^2.5.1",
     "jspdf-autotable": "^3.5.25",
+    "mdb-react-ui-kit": "^4.1.0",
+    "mdb-ui-kit": "^4.3.0",
     "primeflex": "^2.0.0",
     "primeicons": "^5.0.0",
     "primereact": "^7.2.1",

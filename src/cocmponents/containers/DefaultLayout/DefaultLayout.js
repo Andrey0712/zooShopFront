@@ -2,6 +2,7 @@ import React, { Component, Suspense } from 'react';
 import { Route, Switch } from 'react-router-dom';
 import Layout from './Layout';
 import DefaultRoutes from '../../../routes/DefaultRoutes';
+import Footer from '../../footer/footer'
 
 class DefaultLayout extends Component {
 
@@ -23,7 +24,9 @@ class DefaultLayout extends Component {
                                 />
                             ) : (null);
                         })}
+                        
                     </Switch>
+                    <Footer/>
                 </Suspense>
             </Layout>
         );

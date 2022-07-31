@@ -22,7 +22,7 @@ import {push} from 'connected-react-router';
 const UsersPage = () => {
 
 
-    let emptyProduct = {
+    let empty = {
         email: '',
         firstName: '',
         secondName:'',
@@ -32,9 +32,9 @@ const UsersPage = () => {
 
     // const [products, setProducts] = useState(null);
     // const [productDialog, setProductDialog] = useState(false);
-    const [deleteProductDialog, setDeleteProductDialog] = useState(false);
-    const [product, setProduct] = useState(emptyProduct);
-    const [selectedProducts, setSelectedProducts] = useState(null);
+    const [deleteDialog, setDeleteDialog] = useState(false);
+    const [user, setUser] = useState(empty);
+    const [selected, setSelected] = useState(null);
     //const [submitted, setSubmitted] = useState(false);
     const [globalFilter, setGlobalFilter] = useState(null);
     const toast = useRef(null);
@@ -64,17 +64,9 @@ const UsersPage = () => {
         } 
     }, []);
 
-    
-
-    // const openNew = () => {
-        
-    //     dispatch(push("/admin/RegisterProduct"));
-    // }
-
-    
-
-    const hideDeleteProductDialog = () => {
-        setDeleteProductDialog(false);
+   
+    const hideDeleteDialog = () => {
+        setDeleteDialog(false);
     }
 
     
@@ -117,14 +109,14 @@ const UsersPage = () => {
     //     return <span className={`product-badge status-${rowData.inventoryStatus.toLowerCase()}`}>{rowData.inventoryStatus}</span>;
     // }
 
-    const confirmDeleteProduct = (product) => {
-        const Productdel=product.id;
+    const confirmDelete = (user) => {
+        //const Productdel=product.id;
         //console.log("Server is bad register from", Productdel);
-        setProduct(product);
-        setDeleteProductDialog(true);
+        setUser(user);
+        setDeleteDialog(true);
     }
 
-    const deleteProduct = (user) => {
+    const deleteUser = (user) => {
         //const userdel=product.id;
         //console.log("del", userdel);
         //dispatch({type: DELL_PRODUCTS});
@@ -133,8 +125,8 @@ const UsersPage = () => {
         .then(result => {
             
             //console.log("del+++++++");
-         setDeleteProductDialog(false);
-         setProduct(emptyProduct);
+         setDeleteDialog(false);
+         setUser(empty);
          toast.current.show({ severity: 'success', summary: 'Successful', detail: 'Користувача видалено', life: 2000 });
          
         })
@@ -152,7 +144,7 @@ const UsersPage = () => {
             <React.Fragment>
                  
                 <Button icon="pi pi-pencil" className="p-button-rounded p-button-success mr-2"  onClick={() => editProduct(rowData)} />
-                <Button icon="pi pi-trash" className="p-button-rounded p-button-warning"  onClick={() => confirmDeleteProduct(rowData)} />
+                <Button icon="pi pi-trash" className="p-button-rounded p-button-warning"  onClick={() => confirmDelete(rowData)} />
             </React.Fragment>
         );
     }
@@ -169,8 +161,8 @@ const UsersPage = () => {
     
     const deleteProductDialogFooter = (
         <React.Fragment>
-            <Button label="Так" icon="pi pi-times" className="p-button-text"onClick={()=>deleteProduct(product)}  />
-            <Button label="Ні" icon="pi pi-check" className="p-button-text"  onClick={hideDeleteProductDialog}/>
+            <Button label="Так" icon="pi pi-times" className="p-button-text"onClick={()=>deleteUser(user)}  />
+            <Button label="Ні" icon="pi pi-check" className="p-button-text"  onClick={hideDeleteDialog}/>
         </React.Fragment>
     );
         
@@ -183,7 +175,7 @@ const UsersPage = () => {
             <div className="card">
                 {/* <Toolbar className="mb-4" left={leftToolbarTemplate} ></Toolbar> */}
 
-                <DataTable ref={dt} value={list} selection={selectedProducts} onSelectionChange={(e) => setSelectedProducts(e.value)}
+                <DataTable ref={dt} value={list} selection={selected} onSelectionChange={(e) => setSelected(e.value)}
                     dataKey="id" paginator rows={10} rowsPerPageOptions={[5, 10, 25]}
                     paginatorTemplate="FirstPageLink PrevPageLink PageLinks NextPageLink LastPageLink CurrentPageReport RowsPerPageDropdown"
                     currentPageReportTemplate="Showing {first} to {last} of {totalRecords} products"
@@ -198,10 +190,10 @@ const UsersPage = () => {
 
            
 
-            <Dialog visible={deleteProductDialog} style={{ width: '450px' }} header="Видаленя товару" modal footer={deleteProductDialogFooter} onHide={hideDeleteProductDialog}>
+            <Dialog visible={deleteDialog} style={{ width: '450px' }} header="Видаленя товару" modal footer={deleteProductDialogFooter} onHide={hideDeleteDialog}>
                 <div className="confirmation-content">
                     <i className="pi pi-exclamation-triangle mr-3" style={{ fontSize: '2rem'}} />
-                    {product && <span>Ви впевнені, що хочети видалити <b>{product.name}</b>?</span>}
+                    {user && <span>Ви впевнені, що хочети видалити <b>{user.name}</b>?</span>}
                 </div>
             </Dialog>
 

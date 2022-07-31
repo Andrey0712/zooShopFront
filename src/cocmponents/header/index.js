@@ -34,12 +34,12 @@ const Header = () => {
 
     //console.log("Auth user info ", isAuth);
     return (
-
+         
 
         <Navbar ref={ref} bg="light" expand="lg"
             onToggle={setNavExpanded}
             expanded={navExpanded}
-             className="navbar navbar-expand-lg navbar-dark bg-dark" 
+            className="navbar navbar-expand-mt-3 navbar-dark bg-dark" 
         >
             <Container>
                 <Link className="navbar-brand" to="/">ЗооМагазін</Link>
@@ -66,6 +66,7 @@ const Header = () => {
                 </Navbar.Collapse>
             </Container> 
         </Navbar>
+        
        
     )
 }
