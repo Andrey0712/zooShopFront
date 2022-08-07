@@ -37,12 +37,18 @@ const Footer = () => {
         <MDBContainer className='text-center text-md-start mt-5'>
           <MDBRow className='mt-3'>
             <MDBCol md="3" lg="4" xl="3" className='mx-auto mb-4'>
-              <h6 className='text-uppercase fw-bold mb-4'>
+              <h5 className='text-uppercase fw-bold mb-4'style={{marginLeft:"-15px"}}>
                 <MDBIcon icon="gem" className="me-3" />
                 ЗооМагазін КСУ "Альянс"
-              </h6>
-              <p>
-                Дякуєм, що завітали в наш магазин.
+              </h5>
+              <h6>
+                Ми працюємо для Вас за графіком :
+              </h6><br/>
+              <p style={{marginLeft:"25px"}}>
+              вiвторок/четвер:  16.00-19.00
+              </p>
+              <p style={{marginLeft:"55px"}}>
+              недiля:  14.00-17.00
               </p>
             </MDBCol>
 

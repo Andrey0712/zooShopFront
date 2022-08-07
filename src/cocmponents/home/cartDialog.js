@@ -18,6 +18,7 @@ import {
  //import autoTable from 'jspdf-autotable'
  import { getCartUser} from '../../actions/cart';
 
+
 const CartDialog = () => {
 
     const dispatch = useDispatch();
@@ -25,17 +26,10 @@ const CartDialog = () => {
     const { cart } = useSelector(redux => redux);
     const history = useHistory();
     const { list } = useSelector(state => state.cart);
-    //const [carts, setCarts] = useState(null);
     const [loading, setLoading] = useState(true);
+    
 
-    // const dt = useRef(null);
-    // const [selectedProducts, setSelectedProducts] = useState([]);
-
-
-    // useEffect(()=>{
-    //     cartService.list().then(response=>setCarts(response.data));
-    // },[])
-
+    
     useEffect(() => {
         try {
             dispatch(getCartUser())
@@ -132,31 +126,7 @@ const CartDialog = () => {
     
 
 
- //const head = [['id', 'productName', 'productImage', 'productPrice', 'quantity']]
- //const head = [['Name', 'Price', 'Quantity', 'Suma']]
-        // const dataPDF = [
-        //   [1, 'Finland', 7.632, 'Helsinki'],
-        //   [2, 'Norway', 7.594, 'Oslo'],
-          
-        // ]
-
-
-        
-// const exportPdf = () => {
-        
-// console.log(list)
-//             const doc = new jsPDF()
-//             autoTable(doc, {
-//               head: head,
-//               body: list,
-              
-//               didDrawCell: (list) => {
-//                 console.log(list.column.index)
-//               },
-//             })
-            
-//             doc.save('table.pdf')
-//         }
+ 
 
 
     const exportPdf = () => {
@@ -179,11 +149,7 @@ const CartDialog = () => {
         </div>
     );
 
-    // const onSelectionChange = (e) => {
-    //     setSelectedProducts(e.value);
-    // }
-
-   
+       
 
     return (
        
@@ -194,12 +160,7 @@ const CartDialog = () => {
 
                  <Tooltip target=".export-buttons>button" position="bottom" />
 
-           {/* <DataTable ref={dt} value={list} header={header} dataKey="id" responsiveLayout="scroll"
-                    selectionMode="multiple" selection={selectedProducts} onSelectionChange={onSelectionChange}>
-                    {
-                        cols.map((list, item) => <Column key={item.id} field={list.field} header={list.header} />)
-                    }
-                </DataTable> */}
+           
             {
                
                 
@@ -254,14 +215,17 @@ const CartDialog = () => {
                     
             <div className="d-grid gap-2 d-md-flex justify-content-md-end">
              <button type="submit" onClick={() => {
+                
+                history.push("/сheckOut");
+                
 
-                        cartService.del_cart()
-                            .then(result => {
-                                history.push("/");
+                        // cartService.del_cart()
+                        //     .then(result => {
+                        //         history.push("/");
                                 
-                            }).catch(error => {
-                                console.log(error.response);
-                            });
+                        //     }).catch(error => {
+                        //         console.log(error.response);
+                        //     });
 
           }}
           className="btn btn-primary">Замовити</button>  

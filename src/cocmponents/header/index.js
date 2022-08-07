@@ -10,6 +10,7 @@ const Header = () => {
     const dispatch = useDispatch();
 
     const { auth, cart } = useSelector(redux => redux);
+    //console.log("Id current prod:", cart.count);
     const onClickLogout = (e) => {
         e.preventDefault();
         dispatch(logout());
@@ -58,7 +59,13 @@ const Header = () => {
                             <Link className="nav-link" to="/cart">
                                 <i className="pi pi-shopping-cart" style={{ fontSize: "2rem" }}></i>
                                 {cart.count}
+                                
                             </Link>
+                            {/* if({cart.count!=0}){
+                                <Link className="nav-link" to="/сheckOut">Замовленя</Link>
+                            } */}
+                            
+                            
                             <Link className="nav-link" to="/profile">{auth.user.name}</Link>
                             <Link className="nav-link" to="/logout" onClick={onClickLogout}>Вихід</Link>
                         </Nav>
