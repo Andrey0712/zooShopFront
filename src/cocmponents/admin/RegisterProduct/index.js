@@ -24,7 +24,7 @@ const RegisterProduct = () => {
         description: '',
         categoryId: null,
         price: null,
-        //quantity: 0,
+        quantity: null,
         rating: null
         
 
@@ -127,6 +127,12 @@ return (
                         name="categoryId" 
                         id="categoryId"
                         type="text" />
+
+                    <MyTextInput
+                        label="Кількість"
+                        name="quantity"
+                        id="quantity"
+                        type="text"/>
                     
                     
                     <MyTextInput

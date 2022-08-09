@@ -122,13 +122,6 @@ const CartDialog = () => {
     const exportColumns = cols.map(col => ({ title: col.header, dataKey: col.field }));
 
     
-
-    
-
-
- 
-
-
     const exportPdf = () => {
 
         import('jspdf').then(jsPDF => {
@@ -214,6 +207,7 @@ const CartDialog = () => {
             
                     
             <div className="d-grid gap-2 d-md-flex justify-content-md-end">
+             
              <button type="submit" onClick={() => {
                 
                 history.push("/сheckOut");

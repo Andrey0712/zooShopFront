@@ -3,6 +3,7 @@ import http from "../http_common";
 class CartService {
 
     add(data) {
+        console.log("serviseCart", data);
         return http.post("api/carts/add", data);
     }
 

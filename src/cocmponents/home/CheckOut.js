@@ -5,27 +5,35 @@ import { Form, Formik } from 'formik';
 import { useSelector,useDispatch } from 'react-redux';
 import TextInput from '../../cocmponents/common/MyTextInput'
 import EclipseWidget from '../../cocmponents/common/louding';
+import { Button } from 'primereact/button';
+import { Tooltip } from 'primereact/tooltip';
+import {push} from 'connected-react-router';
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css'
+//import { AddCheckOut } from '../../actions/checkOut';
+import http from "../../http_common";
+import cartService from '../../services/cart.service';
 
 const CheckOut = () => {
 
     const { auth, cart } = useSelector(redux => redux);
-    //const { cartData } = useSelector(store => store.cart)
     console.log("cartData", cart.list);
-    //const { auth } = useSelector(state => state.auth);
-    //console.log("auth", auth);
-    
     console.log("authName", auth.user.name);
 
     const initialValues = {
         consumerFirstName: "",
         consumerSecondName: "",
         consumerPhone: "",
+        region: "",
+        city: "",
+        postOffice: "",
         statusId: 1,
         orderItems: cart.list.map((el) => {
           return {
             productId: el.id,
             buyPrice: el.productPrice,
-            quantity: el.quantity,
+            quantity: el.quantity
+            
           };
         }),
       };
@@ -34,18 +42,70 @@ const CheckOut = () => {
       const refFormik = useRef();
     const titleRef = useRef();
     const [invalid, setInvalid] = useState([]);
+    const dispatch = useDispatch();
 
-      const onHandleSubmit=()=>{};
+    const cols = [
+      { field: 'productName', header: 'Name' },
+      { field: 'productPrice', header: 'Price' },
+      { field: 'quantity', header: 'Quantity' },
+     
+  ];
 
+  const exportColumns = cols.map(col => ({ title: col.header, dataKey: col.field }));
+
+  
+  const exportPdf = () => {
+
+      import('jspdf').then(jsPDF => {
+          import('jspdf-autotable').then(() => {
+              const doc = new jsPDF.default(0, 0);
+
+              doc.autoTable(exportColumns, cart.list);
+              doc.save('Замовленя.pdf');
+          })
+      })
+  }
+
+  const header = (
+      <div className="flex align-items-center export-buttons">
+          
+          <Button type="button" icon="pi pi-file-pdf" onClick={exportPdf} className="p-button-warning mr-2" data-pr-tooltip="PDF" />
+          
+      </div>
+  );
+
+   const onHandleSubmit = async (values) => {
+	 	try {
+    setLoading(true);
+    console.log("onHandleSubmit+++++++");         
+           const formData = new FormData();
+           Object.entries(values).forEach(([key, value]) => formData.append(key, value));
+            console.log("onHandleSubmit----------",values);
+    const result = await http.post("/api/orders/add", values);
+    setLoading(false);
+                   toast.warn ("Замовленя оформлено",{position: toast.POSITION.BOTTOM_RIGHT,autoClose:3000});
+                    // cartService.del_cart()
+                    //         .then(result => {
+                                
+                                
+                    //         }).catch(error => {
+                    //             console.log(error.response);
+                    //         });
+                    dispatch(push("/"));
+                   
+  }
+   catch (error) {
+	 				setLoading(false);
+  console.log("Server is bad from", error);
+	 	}
+  }
+	 
 
       return (
-    
-        <div className="row m-4">
+        <div class="container">
+      {/* <div className="row m-4"> */}
             <h3 className="text-center">Оформлення замовлення</h3>
-            <div className="col-8">
-              <div className="row">
-                <div className="col-6">
-                  <h5 className="m-3 text-center">Контактні дані</h5>
+            
          {/* <div className="row">
             <div className="offset-md-3 col-md-6">
                 <h1 ref={titleRef} className="text-center" >Оформленя замовленя</h1>  */}
@@ -71,70 +131,161 @@ const CheckOut = () => {
                     onSubmit={onHandleSubmit}
                 >
                     <Form>
+          <div class="row justify-content-evenly">
+            <div class="col-4">
+            {/* <div className="col-8">
+              <div className="row">
+                <div className="col-6"> */}
+                  <h5 className="m-3 text-center">Контактні дані</h5>
                     <TextInput
                             label="Ім'я"
-                            name="firstName" 
-                            id="firstName"
+                            name="consumerFirstName" 
+                            id="consumerFirstName"
                             type="text" />
                   
                   <TextInput
                             label="Прізвище"
-                            name="secondName"
-                            id="secondName"
+                            name="consumerSecondName"
+                            id="consumerSecondName"
                             type="text" />
                   <TextInput
                             label="Телефон"
-                            name="phone"
-                            id="phone"
+                            name="consumerPhone"
+                            id="consumerPhone"
                             type="text" />
-           
+                            </div>
+                          {/* </div>
+                        </div> */}
 
-        <hr />
-        <div className="col-6">
-                  {/* </div>/<h5 className="m-3 text-center">Доставка</h5> */}
-              <h5 className="m-2 text-center">Товари</h5>
-              {cart.list.map(
-                ({ productName, productPrice, quantity }) => {
-                  return (
-                    
-                      <div className="card-body row">
-                        <div className="media">
-                          <div className="row my-auto flex-column flex-md-row">
-                           
-                            <div className="col my-auto">
-                              <small>{productName}</small>
-                            </div>
-                            <div className="col my-auto">
-                              <small>Ціна : {productPrice} грн.</small>
-                            </div>
-                            <div className="col my-auto">
-                              <small>Кількість : {quantity}</small>
-                            </div>
-                            <div className="col my-auto">
-                              <h6 className="mb-0">
-                                Cума : {productPrice * quantity} $
-                              </h6>
-                            </div>
-                          </div>
+           {/* <div className="col-12">
+              <div className="row"> */}
+
+                {/* <div className="col-9"> */}
+                <div class="col-4">
+                  <h5 className="m-3 text-center">Доставка</h5>
+                  <TextInput
+                            label="Область"
+                            name="region" 
+                            id="region"
+                            type="text" />
+                  
+                  <TextInput
+                            label="Місто"
+                            name="city"
+                            id="city"
+                            type="text" />
+                  <TextInput
+                            label="Поштове відділеня"
+                            name="postOffice"
+                            id="postOffice"
+                            type="text" />
+                             {/* </div>
+                          </div> */}
                         </div>
-                      </div>
-                   
-                  );
-                }
-              )}
-              </div>
-                            <div className="d-grid gap-2 d-md-flex justify-content-md-end">
-                                <button type="submit" className="btn btn-primary">Оформленя замовленя</button>
-                            </div>
+                        </div>
+        <hr />
+        <div class="row justify-content-center">
+          <h3 className="m-1 text-center">Ваші замовленя</h3>
+
+               <div className="offset-md-1 col-md-6">
+                  
+              {
+
+                <table className="table">
+                <thead className="table table-bordered">
+                    <tr>
+                       
                         
+                        <th scope="col">Назва</th>
+                        <th scope="col">Ціна</th>
+                        <th scope="col">Кількість</th>
+                        <th scope="col">Сума</th>
+                        
+                    </tr>
+                </thead>
+
+                 <tbody>
+                    {
+                    cart.list.map((item) =>
+                        <tr key={item.id}>
+                           
+                            
+                            <td>{item.productName}</td>
+                            <td> {item.productPrice} грн.</td>
+                            <td> {item.quantity} </td>
+                            <td> {item.quantity*item.productPrice} грн. </td>
+                            
+                            
+                        </tr>)}
+                        
+                </tbody>
+               
+            </table>
+
+            
+
+
+
+
+              // cart.list.map(
+              //   ({ productName, productPrice, quantity }) => {
+              //     return (
+                    
+              //         <div className="card-body row">
+              //           <div className="media">
+              //             <div className="row my-auto flex-column flex-md-row">
+                           
+              //               <div className="col my-auto">
+              //                 <small>{productName}</small>
+              //               </div>
+              //               <div className="col my-auto">
+              //                 <small>Ціна : {productPrice} грн</small>
+              //               </div>
+              //               <div className="col my-auto">
+              //                 <small>Кількість : {quantity}</small>
+              //               </div>
+              //               <div className="col my-auto">
+              //                 <h6 className="mb-0">
+              //                   Cума : {productPrice * quantity} грн
+              //                 </h6>
+              //               </div>
+              //             </div>
+              //           </div>
+              //         </div>
+                   
+              //     );
+              //   }
+              // )
+              }
+              </div></div>
+
+              <h3 className="d-grid gap-2 d-md-flex justify-content-md-end" >До оплати {cart.summa} грн.</h3> <br/>
+              
+              <div className="d-grid gap-2 d-md-flex justify-content-md-end">
+             
+             <button type="submit" onClick={() => {
+               
+                        // cartService.del_cart()
+                        //     .then(result => {
+                        //         history.push("/");
+                                
+                        //     }).catch(error => {
+                        //         console.log(error.response);
+                        //     });
+
+          }}
+          className="btn btn-primary">Оформити замовленя</button>  
+          <div className="flex align-items-center export-buttons">
+            
+            <Button type="button" icon="pi pi-file-pdf" onClick={exportPdf} className="p-button-warning mr-2" data-pr-tooltip="PDF" />
+            
+        </div></div>
+
+                        {loading && <EclipseWidget />}
                     </Form>
                 </Formik>
-            </div>
+          </div>
     
-            {loading && <EclipseWidget />}
-        </div>
-        </div>
-        </div>
        
     )
 

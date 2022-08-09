@@ -61,10 +61,6 @@ const Header = () => {
                                 {cart.count}
                                 
                             </Link>
-                            {/* if({cart.count!=0}){
-                                <Link className="nav-link" to="/сheckOut">Замовленя</Link>
-                            } */}
-                            
                             
                             <Link className="nav-link" to="/profile">{auth.user.name}</Link>
                             <Link className="nav-link" to="/logout" onClick={onClickLogout}>Вихід</Link>
