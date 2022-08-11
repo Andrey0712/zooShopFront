@@ -20,3 +20,5 @@ export const CART_MINUS_PRODUCT = "CART_MINUS_PRODUCT";
 //export const CART_DEL_ITEM_PRODUCT = "CART_DEL_ITEM_PRODUCT";
 
 export const CHECKOUT = "CHECKOUT";
+export const ORDERS = "ORDERS";
+export const CHACK_STATUS = "CHACK_STATUS";

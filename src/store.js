@@ -6,6 +6,7 @@ import { createBrowserHistory } from 'history';
 import usersReducer from "./reducers/usersReducer";
 import productReducer from "./reducers/productReducer";
 import cartReducer from "./reducers/cartReducer";
+import ordersReducer from "./reducers/oderReduser";
 
 
 const baseUrl = document.getElementsByTagName('base')[0].getAttribute('href');
@@ -21,6 +22,7 @@ const rootReducer = combineReducers({
     user:usersReducer,
     prod:productReducer,
     cart:cartReducer,
+    order:ordersReducer,
     router: connectRouter(history)
 });
 

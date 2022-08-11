@@ -1,7 +1,4 @@
-// import {useEffect} from "react";
-// import {useDispatch} from "react-redux";
-// import {useSelector} from "react-redux";
-// import http from "../../http_common";
+
  import { getUsers } from '../../actions/users';
  import userService from "../../services/user.service";
 // import { Link } from 'react-router-dom';

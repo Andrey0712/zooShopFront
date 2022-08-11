@@ -28,10 +28,13 @@ const HeaderAdmin = () => {
                             <Link className="nav-link active" aria-current="page" to="/admin/userlist">Користувачі</Link>
                             
                         </li>
-                        {/* <li className="nav-item">
-                            <Link className="nav-link active" aria-current="page" to="/admin/RegisterProduct">Додати товар</Link>
+                        <li className="nav-item">
+                            <Link className="nav-link active" aria-current="page" to="/admin/oderlist">Замовленя</Link>
                             
-                        </li> */}
+                        </li>
+                        <li className="nav-item">
+                        <Link className="nav-link active" aria-current="page" to="/">Вихід на головну</Link>
+                        </li>
                     </ul>
 
                     
