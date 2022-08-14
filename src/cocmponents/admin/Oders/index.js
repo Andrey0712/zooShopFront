@@ -136,6 +136,15 @@ const OdersPage = () => {
         );
     }
 
+    const actionBodyOdersItem = (rowData) => {
+        return (
+            <React.Fragment>
+                
+                <Button icon="pi pi-shopping-cart" className="p-button-rounded p-button-help"   onClick={()=>statusTrash(rowData)}/>
+            </React.Fragment>
+        );
+    }
+
     const header = (
         <div className="table-header">
             <h5 className="mx-0 my-1">Панель керування замовленями</h5>
@@ -164,9 +173,10 @@ const OdersPage = () => {
                     <Column field="consumerPhone" header="Телефон" sortable style={{ minWidth: '8rem' }} ></Column>
                     <Column field="region" header="Регіон" sortable style={{ minWidth: '10rem' }} ></Column>
                     <Column field="city" header="Місто" sortable style={{ minWidth: '8rem' }}></Column>
-                    <Column field="postOffice" header="Поштове відділеня" sortable style={{ minWidth: '16rem' }}></Column>
+                    <Column field="postOffice" header="Поштове відділеня" sortable style={{ minWidth: '12rem' }}></Column>
                     <Column field="statusName" header="Статус замовленя" sortable style={{ minWidth: '8rem' }}></Column>
-                    <Column header="Зміна статусу замовленя" body={actionBodyTemplate} exportable={false} style={{ minWidth: '12rem' }}></Column>
+                    <Column header="Зміна статусу замовленя" body={actionBodyTemplate} exportable={false} style={{ minWidth: '10rem' }}></Column>
+                    <Column header="Замовленя" body={actionBodyOdersItem} exportable={false} style={{ minWidth: '4rem' }}></Column>
                 </DataTable>
             </div>
 
