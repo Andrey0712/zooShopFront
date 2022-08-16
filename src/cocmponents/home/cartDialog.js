@@ -69,9 +69,11 @@ const CartDialog = () => {
     const onClickPlus = (e) => {
         e.preventDefault();
         const id=e.target.id;
+        console.log("productId",id);
         try {            
             var data = {
                 productId: id
+                
                 //quantity: 1
             }
             dispatch(PlusProd(data))
@@ -161,7 +163,7 @@ const CartDialog = () => {
                 <table className="table">
                 <thead className="table table-bordered">
                     <tr>
-                       
+                    {/* <th scope="col">ID</th> */}
                         <th scope="col">Image</th>
                         <th scope="col">Name</th>
                         <th scope="col">Price</th>
@@ -175,13 +177,14 @@ const CartDialog = () => {
                     {
                     list && list.map((item) =>
                         <tr key={item.id}>
-                           
+                           {/* <td>{item.productId}</td> */}
                             <td>
                                 <img src={`${urlBackend}`+item.productImage}
                                     alt=" "
                                     width="100"
                                 />
                             </td>
+                            
                             <td>{item.productName}</td>
                             <td> {item.productPrice} грн.</td>
                             <td> {item.quantity} </td>

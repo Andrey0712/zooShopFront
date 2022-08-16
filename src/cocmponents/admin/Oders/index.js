@@ -5,13 +5,14 @@ import { DataTable } from 'primereact/datatable';
 import { Column } from 'primereact/column';
 import { Toast } from 'primereact/toast';
 import { Button } from 'primereact/button';
-//import { Dialog } from 'primereact/dialog';
+import { Dialog } from 'primereact/dialog';
 import { InputText } from 'primereact/inputtext';
 import './DataTableOder.css';
 import {push} from 'connected-react-router';
 import { chack_status, getOrders } from '../../../actions/orders';
 import ordersService from '../../../services/orders.service';
 import { useHistory } from "react-router-dom";
+import { DataView, DataViewLayoutOptions } from 'primereact/dataview';
 
 const OdersPage = () => {
 
@@ -40,6 +41,9 @@ const OdersPage = () => {
     const [loading, setLoading] = useState(true);
     const { list } = useSelector(state => state.order);
     const history = useHistory();
+
+    const[visible,setVisible]=useState(false);
+    const [layout, setLayout] = useState('grid');
          
     useEffect(() => {
         try {
@@ -125,6 +129,30 @@ const OdersPage = () => {
                
 
     }
+
+    const listItems=(list)=>{
+        console.log("listItems", list);
+        try {            
+                    // var dataStatus = {
+                    //     Id: status.id,
+                    //     StatusId: 3
+                    // }
+                    // console.log("data",dataStatus);
+                    // dispatch(chack_status(dataStatus))
+                // .then(() => {
+                //     //setVisible(true);
+                //     console.log("statusTrash!");
+                //     history.push("/admin/oderlist");
+                // })
+                // .catch(ex => {
+                // });
+                }
+                catch (error) {
+                    console.log("Server is bad ", error);
+                }
+               
+
+    }
    
     const actionBodyTemplate = (rowData) => {
         return (
@@ -140,7 +168,7 @@ const OdersPage = () => {
         return (
             <React.Fragment>
                 
-                <Button icon="pi pi-shopping-cart" className="p-button-rounded p-button-help"   onClick={()=>statusTrash(rowData)}/>
+                <Button icon="pi pi-shopping-cart" className="p-button-rounded p-button-help"   onClick={()=>listItems(rowData)}/>
             </React.Fragment>
         );
     }
@@ -180,9 +208,18 @@ const OdersPage = () => {
                 </DataTable>
             </div>
 
-           
+            
+        <Dialog
+                // header='Dialog'
+                visible={visible}
+                style={{ width: '50vw' }}
+                modal={true}
+                onHide={() => setVisible(false)}
+                maximizable={false}>
+                {/* <CartDialog /> */}
+            </Dialog>
 
-                        
+                      
         </div>
     );
 

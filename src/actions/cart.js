@@ -31,6 +31,7 @@ export const AddCartProduct = (product) => async (dispatch) => {
 
 export const getCartUser = () => async (dispatch) => {
     const {data} = await cartService.list();
+    console.log("getCart", data);
     dispatch({type: CART_LOAD_PRODUCT, payload: data});
 }
 
