@@ -9,10 +9,12 @@ import { Dialog } from 'primereact/dialog';
 import { InputText } from 'primereact/inputtext';
 import './DataTableOder.css';
 import {push} from 'connected-react-router';
-import { chack_status, getOrders } from '../../../actions/orders';
+import { chack_status, getOrders,list_Items } from '../../../actions/orders';
 import ordersService from '../../../services/orders.service';
 import { useHistory } from "react-router-dom";
 import { DataView, DataViewLayoutOptions } from 'primereact/dataview';
+import OderItemsPage from './orderItems';
+
 
 const OdersPage = () => {
 
@@ -61,27 +63,7 @@ const OdersPage = () => {
         } 
     }, []);
 
-    // const onClickPlus = (e) => {
-    //     e.preventDefault();
-    //     const id=e.target.id;
-    //     try {            
-    //         var data = {
-    //             productId: id
-    //             //quantity: 1
-    //         }
-    //         dispatch(PlusProd(data))
-    //             .then(() => {
-    //                 setVisible(true);
-    //                 console.log("Add to cart competed!");
-    //                 history.push("/cart");
-    //             })
-    //             .catch(ex => {
-    //             });
-    //     }
-    //     catch (error) {
-    //         console.log("Server is bad ", error);
-    //     }
-    // }
+    
     
     const statusCheck = (status) => {
         console.log("statusCheck", status);
@@ -130,26 +112,28 @@ const OdersPage = () => {
 
     }
 
+    
     const listItems=(list)=>{
-        console.log("listItems", list);
-        try {            
-                    // var dataStatus = {
-                    //     Id: status.id,
-                    //     StatusId: 3
-                    // }
-                    // console.log("data",dataStatus);
-                    // dispatch(chack_status(dataStatus))
-                // .then(() => {
-                //     //setVisible(true);
-                //     console.log("statusTrash!");
-                //     history.push("/admin/oderlist");
-                // })
-                // .catch(ex => {
-                // });
-                }
-                catch (error) {
-                    console.log("Server is bad ", error);
-                }
+        console.log("listItems", list.id);
+        dispatch(push(`/admin/Oders/orderItems?id=${list.id}`));
+       
+        // try {            
+        //     var listItems = {
+        //         Id: list.id
+                
+        //     }
+        //             dispatch(list_Items(listItems))
+        //         .then(() => {
+        //             //setVisible(true);
+        //             console.log("list items ok!");
+        //             //history.push("/admin/oderlist");
+        //         })
+        //         .catch(ex => {
+        //         });
+        //         }
+        //         catch (error) {
+        //             console.log("Server is bad ", error);
+        //         }
                
 
     }
@@ -169,6 +153,7 @@ const OdersPage = () => {
             <React.Fragment>
                 
                 <Button icon="pi pi-shopping-cart" className="p-button-rounded p-button-help"   onClick={()=>listItems(rowData)}/>
+                
             </React.Fragment>
         );
     }
@@ -184,7 +169,21 @@ const OdersPage = () => {
     );
     
     return (
-      
+        <>
+        <Dialog
+                // header='Dialog'
+                visible={visible}
+                style={{ width: '50vw' }}
+                modal={true}
+                onHide={() => setVisible(false)}
+                maximizable={false}>
+                 <OderItemsPage />
+            </Dialog>
+
+            {/* <Dialog visible={visible} onHide={setVisible(false)} breakpoints={{'960px': '75vw', '640px': '100vw'}} style={{width: '50vw'}}>
+            <OderItemsPage />
+</Dialog> */}
+
         <div className="datatable-crud-demo">
             
             <Toast ref={toast} />
@@ -206,21 +205,25 @@ const OdersPage = () => {
                     <Column header="Зміна статусу замовленя" body={actionBodyTemplate} exportable={false} style={{ minWidth: '10rem' }}></Column>
                     <Column header="Замовленя" body={actionBodyOdersItem} exportable={false} style={{ minWidth: '4rem' }}></Column>
                 </DataTable>
+
+                
             </div>
+           
 
             
-        <Dialog
+            {/* <Dialog
                 // header='Dialog'
                 visible={visible}
                 style={{ width: '50vw' }}
                 modal={true}
                 onHide={() => setVisible(false)}
                 maximizable={false}>
-                {/* <CartDialog /> */}
-            </Dialog>
-
-                      
+                <OderItemsPage />
+            </Dialog> */}
+            
+                                 
         </div>
+        </>
     );
 
 }
