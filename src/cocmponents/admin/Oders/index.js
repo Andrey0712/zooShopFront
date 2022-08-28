@@ -14,6 +14,7 @@ import ordersService from '../../../services/orders.service';
 import { useHistory } from "react-router-dom";
 import { DataView, DataViewLayoutOptions } from 'primereact/dataview';
 import OderItemsPage from './orderItems';
+import { setNestedObjectValues } from 'formik';
 
 
 const OdersPage = () => {
@@ -33,7 +34,7 @@ const OdersPage = () => {
     };
 
     
-    const [deleteDialog, setDeleteDialog] = useState(false);
+   
     const [order, setOrder] = useState(empty);
     const [selected, setSelected] = useState(null);
     const [globalFilter, setGlobalFilter] = useState(null);
@@ -116,26 +117,10 @@ const OdersPage = () => {
     const listItems=(list)=>{
         console.log("listItems", list.id);
         dispatch(push(`/admin/Oders/orderItems?id=${list.id}`));
-       
-        // try {            
-        //     var listItems = {
-        //         Id: list.id
-                
-        //     }
-        //             dispatch(list_Items(listItems))
-        //         .then(() => {
-        //             //setVisible(true);
-        //             console.log("list items ok!");
-        //             //history.push("/admin/oderlist");
-        //         })
-        //         .catch(ex => {
-        //         });
-        //         }
-        //         catch (error) {
-        //             console.log("Server is bad ", error);
-        //         }
-               
-
+        //setState({visible:true});
+        setVisible(true);
+        
+        
     }
    
     const actionBodyTemplate = (rowData) => {
@@ -167,7 +152,8 @@ const OdersPage = () => {
             </span>
         </div>
     );
-    
+
+        
     return (
         <>
         <Dialog
@@ -177,9 +163,11 @@ const OdersPage = () => {
                 modal={true}
                 onHide={() => setVisible(false)}
                 maximizable={false}>
+                    {/* <h5 className="mx-0 my-1">Панель керування замовленями</h5> */}
                  <OderItemsPage />
             </Dialog>
 
+            
             {/* <Dialog visible={visible} onHide={setVisible(false)} breakpoints={{'960px': '75vw', '640px': '100vw'}} style={{width: '50vw'}}>
             <OderItemsPage />
 </Dialog> */}
