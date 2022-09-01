@@ -17,15 +17,26 @@ const OderItemsPage = () => {
     console.log( "list:", list);
     const number_orderProd=list.find(order=>order.id==oderId);
     const orderProd=list.find(order=>order.id==oderId).items;
-    
+    const number_orderProd_id=number_orderProd.id;
      console.log( "order:", orderProd);
+     console.log( "number_orderProd_id:", number_orderProd_id);
      
 
+    //  const cols = [
+    //     { field: 'productId', header: 'ID товару' },
+    //     { field: 'productName', header: 'Назва товару' },
+    //     { field: 'quantity', header: 'Кількість' },
+    //     { field: 'buyPrice', header: 'Ціна' },
+    // ];
+  
+    // const exportColumns = cols.map(col => ({ title: col.header, dataKey: col.field }));
     
     
     const exportExcel = () => {
         import('xlsx').then(xlsx => {
             const worksheet = xlsx.utils.json_to_sheet(orderProd);
+            
+            console.log( "worksheet", worksheet);
             const workbook = { Sheets: { 'data': worksheet }, SheetNames: ['data'] };
             const excelBuffer = xlsx.write(workbook, { bookType: 'xlsx', type: 'array' });
             saveAsExcelFile(excelBuffer, 'orderProd');
@@ -40,14 +51,14 @@ const OderItemsPage = () => {
                     type: EXCEL_TYPE
                 });
 
-                module.default.saveAs(data, fileName + '_export_' + new Date().getTime() + EXCEL_EXTENSION);
+                module.default.saveAs(data, 'замовленя № '+ number_orderProd_id + EXCEL_EXTENSION);
             }
         });
     }
 
 const header = (
         <div className="table-header">
-            <h5 className="mx-0 my-1">Товарні позиції замовленя № {number_orderProd.id}</h5>
+           <h1 className="text-center" >Товарні позиції замовленя № {number_orderProd.id}</h1>
             <Button type="button" icon="pi pi-file-excel" onClick={exportExcel} className="p-button-success mr-2" data-pr-tooltip="XLS" />
                     </div>
     );
@@ -63,10 +74,11 @@ const header = (
                 <DataTable value={orderProd}
                 
                     dataKey="id"  header={header} responsiveLayout="scroll">
-                    <Column field="productId" header="Номер замовленя" style={{ minWidth: '6rem' }}></Column>
-                    <Column field="productName" header="Назва товару" style={{ minWidth: '8rem' }}></Column>
+                    <Column field="productId" header="ID товару" style={{ minWidth: '6rem' }}></Column>
+                    <Column field="product" header="Назва товару" style={{ minWidth: '8rem' }}></Column>
                     <Column field="quantity" header="Кількість" sortable style={{ minWidth: '8rem' }} ></Column>
-                    <Column field="buyPrice" header="Ціна" sortable style={{ minWidth: '8rem' }} ></Column>
+                    <Column field="price" header="Ціна" sortable style={{ minWidth: '8rem' }} ></Column>
+                    <Column field="suma" header="Вартість" sortable style={{ minWidth: '8rem' }} ></Column>
                     
                     
                 </DataTable>

@@ -46,25 +46,25 @@ const CheckOut = () => {
 
     const cols = [
       { field: 'productName', header: 'Name' },
-      { field: 'productPrice', header: 'Price' },
-      { field: 'quantity', header: 'Quantity' },
+        { field: 'productPrice', header: 'Price' },
+        { field: 'quantity', header: 'Quantity' },
      
   ];
 
   const exportColumns = cols.map(col => ({ title: col.header, dataKey: col.field }));
 
-  
-  const exportPdf = () => {
+    
+    const exportPdf = () => {
 
-      import('jspdf').then(jsPDF => {
-          import('jspdf-autotable').then(() => {
-              const doc = new jsPDF.default(0, 0);
+        import('jspdf').then(jsPDF => {
+            import('jspdf-autotable').then(() => {
+                const doc = new jsPDF.default(0, 0);
 
-              doc.autoTable(exportColumns, cart.list);
-              doc.save('Замовленя.pdf');
-          })
-      })
-  }
+                doc.autoTable(exportColumns, cart.list);
+                doc.save('Замовленя.pdf');
+            })
+        })
+    }
 
   const header = (
       <div className="flex align-items-center export-buttons">

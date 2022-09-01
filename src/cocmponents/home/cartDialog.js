@@ -116,8 +116,8 @@ const CartDialog = () => {
         { field: 'id', header: 'Id' },
         { field: 'productName', header: 'Name' },
         { field: 'productPrice', header: 'Price' },
-        { field: 'quantity', header: 'Quantity' },
-        { field: 'productImage', header: 'Image' }
+        { field: 'quantity', header: 'Quantity' }
+        // { field: 'productImage', header: 'Image' }
         
     ];
 
