@@ -205,7 +205,7 @@ const HomePage = () => {
                 <div className="product-list-item">
                 <img src={`${urlBackend}`+data.image} 
                     //<img src={`${data.image}`}  
-                    height="200" width="150" onError={(e) => 
+                    height="200"  onError={(e) => 
                         e.target.src='https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} alt={data.name} />
                     <div className="product-list-detail">
                         <div className="product-name">{data.name}</div>
@@ -239,7 +239,7 @@ const HomePage = () => {
                         <span className={`product-badge status-${data.inventoryStatus.toLowerCase()}`}>{data.inventoryStatus}</span>
                     </div>
                     <div className="product-grid-item-content">
-                    <img src={`${urlBackend}`+data.image}  height="200" width="150"
+                    <img src={`${urlBackend}`+data.image}  height="200" 
                     onError={(e) => e.target.src='https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} alt={data.name} />
                         <div className="product-name">{data.name}</div>
                         <div className="product-description">{data.description}</div>

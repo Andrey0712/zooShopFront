@@ -58,7 +58,7 @@ const CheckOut = () => {
 
         import('jspdf').then(jsPDF => {
             import('jspdf-autotable').then(() => {
-                const doc = new jsPDF.default(0, 0);
+                const doc = new jsPDF.default(0,0 );
 
                 doc.autoTable(exportColumns, cart.list);
                 doc.save('Замовленя.pdf');

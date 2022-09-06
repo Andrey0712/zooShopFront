@@ -36,7 +36,7 @@ const EditProduct = ( ) => {
         description: current.description,
         //categoryId: current.category,
         price: current.price,
-        //quantity: 0,
+        quantity: current.quantity,
         rating: current.rating
         
 
@@ -49,6 +49,7 @@ const EditProduct = ( ) => {
     const [invalid, setInvalid] = useState([]);
     const [loading, setLoading] = useState(false);
 
+    
 
 const onSubmitHandler = async (values) => {
     
@@ -148,6 +149,14 @@ return (
                         name="rating"
                         id="rating"
                         type="text"/>
+
+                    <MyTextInput
+                        label="Кількість"
+                        name="quantity"
+                        id="quantity"
+                        type="text"/>
+
+                        
 
                         <div className="d-grid gap-2 d-md-flex justify-content-md-end">
                             <button type="submit" className="btn btn-primary">Редагуваня продукта</button>
