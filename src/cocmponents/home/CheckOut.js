@@ -45,7 +45,7 @@ const CheckOut = () => {
     const dispatch = useDispatch();
 
     const cols = [
-      { field: 'productName', header: 'Name' },
+      { field: 'productName', header: 'Product name' },
         { field: 'productPrice', header: 'Price' },
         { field: 'quantity', header: 'Quantity' },
      

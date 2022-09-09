@@ -175,7 +175,7 @@ const UsersPage = () => {
                 <DataTable ref={dt} value={list} selection={selected} onSelectionChange={(e) => setSelected(e.value)}
                     dataKey="id" paginator rows={10} rowsPerPageOptions={[5, 10, 25]}
                     paginatorTemplate="FirstPageLink PrevPageLink PageLinks NextPageLink LastPageLink CurrentPageReport RowsPerPageDropdown"
-                    currentPageReportTemplate="Showing {first} to {last} of {totalRecords} products"
+                    currentPageReportTemplate="Відображено з {first} по {last} всього {totalRecords} користувачів"
                     globalFilter={globalFilter} header={header} responsiveLayout="scroll">
                     <Column field="email" header="Email" style={{ minWidth: '8rem' }}></Column>
                     <Column field="firstName" header="FirstName" sortable style={{ minWidth: '16rem' }} ></Column>

@@ -226,11 +226,11 @@ const CartDialog = () => {
 
           }}
           className="btn btn-primary">Замовити</button>  
-          <div className="flex align-items-center export-buttons">
+          {/* <div className="flex align-items-center export-buttons">
             
             <Button type="button" icon="pi pi-file-pdf" onClick={exportPdf} className="p-button-warning mr-2" data-pr-tooltip="PDF" />
             
-        </div>
+        </div> */}
          </div>
 
                <br/>          

@@ -4,6 +4,7 @@ import { useSelector, useDispatch } from 'react-redux'
 import { logout } from '../../actions/auth';
 import { push } from 'connected-react-router';
 import { Navbar, Container, Nav } from 'react-bootstrap';
+import logo from "../../../src/logoHeder.png";
 
 const Header = () => {
 
@@ -43,7 +44,8 @@ const Header = () => {
             className="navbar navbar-expand-mt-3 navbar-dark bg-dark" 
         >
             <Container>
-                <Link className="navbar-brand" to="/">ЗооМагазін</Link>
+            <img src={logo} alt="" width="100" />
+                <Link className="navbar-brand" to="/">ЗооМагазин</Link>
                 <Navbar.Toggle aria-controls="basic-navbar-nav" />
                 <Navbar.Collapse id="basic-navbar-nav">
                     <Nav className="me-auto" onClick={() => setNavExpanded(false)}>

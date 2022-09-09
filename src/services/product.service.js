@@ -4,6 +4,9 @@ class ProductsService {
     get_list_prod() {
         return http.get("api/product/list");
     }
+    get_rahunok() {
+        return http.get("api/product/getfile");
+    }
     registerProd(data) {
         return http.post("api/product/add", data, {
             headers: {

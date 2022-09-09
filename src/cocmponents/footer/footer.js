@@ -4,6 +4,7 @@ import "./footer.css";
 import { faFacebook,faTelegram,faYoutube,faViber } from "@fortawesome/free-brands-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { MDBFooter, MDBContainer, MDBRow, MDBCol, MDBIcon } from 'mdb-react-ui-kit';
+import { urlBackend } from "../../http_common";
 
 const Footer = () => {
   return (
@@ -39,7 +40,7 @@ const Footer = () => {
             <MDBCol md="3" lg="4" xl="3" className='mx-auto mb-4'>
               <h5 className='text-uppercase fw-bold mb-4'style={{marginLeft:"-15px"}}>
                 <MDBIcon icon="gem" className="me-3" />
-                ЗооМагазін КСУ "Альянс"
+                ЗооМагазин КСУ "Альянс"
               </h5>
               <h6>
                 Ми працюємо для Вас за графіком :
@@ -77,6 +78,13 @@ const Footer = () => {
               <p>
                 <a href='mailto:nashemistoart@gmail.com' className='text-reset'>
                   Тех. підтримка
+                </a>
+              </p>
+              <p>
+                <a href={`${urlBackend}`+"api/product/details_for_payment"} className='text-reset' 
+                 target="_blank"
+                >
+                  Реквізити для оплати
                 </a>
               </p>
               
