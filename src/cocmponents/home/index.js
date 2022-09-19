@@ -58,11 +58,11 @@
 
 
 
-import React, {useState, useEffect } from 'react'
+import React, {useState, useEffect,useRef} from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { DataView, DataViewLayoutOptions } from 'primereact/dataview';
 import { Button } from 'primereact/button';
-//import { Dropdown } from 'primereact/dropdown';
+import { Dropdown } from 'primereact/dropdown';
 import { Rating } from 'primereact/rating';
 import './home.css';
 import { getProduct, getProductByCategory, getProductSearch} from '../../actions/products';
@@ -74,17 +74,19 @@ import {urlBackend} from '../../http_common';
 import { InputText } from 'primereact/inputtext';
 import { MultiSelect } from 'primereact/multiselect';
 import { SelectButton } from 'primereact/selectbutton';
-
+import { toast } from 'react-toastify';
+import { useHistory } from "react-router-dom";
 
 const HomePage = () => {
 
     const dispatch = useDispatch();
     const { list } = useSelector(state => state.prod);
-
+    const { auth} = useSelector(redux => redux);
     const [value3, setValue3] = useState('');
     const[visible,setVisible]=useState(false);
     const [layout, setLayout] = useState('grid');
-
+    
+    const history = useHistory();
     //const [sortKey, setSortKey] = useState(null);
     // const [sortOrder, setSortOrder] = useState(null);
     // const [sortField, setSortField] = useState(null);
@@ -95,11 +97,18 @@ const HomePage = () => {
 
     const [selected, setSelected] = useState(null);
     const [loading, setLoading] = useState(true);
+    const [selectedDropdoun, setSelectedDropdoun] = useState(null);
+    
 
     
     const category = ['Корм', 'Вітаміни','Іграшки','Ветеринарні препарати'];
 
-    
+    const categorys = [
+        { name: 'Корм', code: 'Корм' },
+        { name: 'Вітаміни', code: 'Вітаміни' },
+        { name: 'Іграшки', code: 'Іграшки' },
+        { name: 'Ветеринарні препарати', code: 'Ветеринарні препарати' }
+    ];
     
 
     useEffect(() => {
@@ -120,8 +129,10 @@ const HomePage = () => {
 
     
 
+
     const onClickAddToCart =(e, id) => {
         e.preventDefault();
+        if(auth.isAuth){
         try {            
             var data = {
                 productId: id,
@@ -137,9 +148,17 @@ const HomePage = () => {
         }
         catch (error) {
             console.log("Server is bad register from", error);
-        }
+        }}
+        else
+        {
+            toast.error ("Ви не зареєстровані",{position: toast.POSITION.TOP_RIGHT, autoClose:2000});
+            
+        history.push("/register");
+    }
 
     }
+
+    
 
     
 
@@ -197,7 +216,36 @@ const HomePage = () => {
 
     }
 
+    const onChangeCategoryDropdoun =(e) => {
+        e.preventDefault();
+        setSelectedDropdoun(e.value.name);
+        try { 
+            // var rez= e.target.value[0].name;  
+            // console.log({rez}) 
+            var data = {
+                product: e.value.name,
+                
+            }
+            console.log({data},"ffff")
+            dispatch(getProductByCategory(data))
+            
+                .then(() => {
+                    setLoading(false);
+                    //console.log("Add to cart competed!");
+                })
+                .catch(ex => {
+                    setLoading(false);
+                });
+                
+        }
+        catch (error) {
+            console.log("Server is bad register from", error);
+        }
 
+    }
+
+
+    //console.log("Auth user info ", auth.isAuth);
     const renderListItem = (data) => {
         return (
             
@@ -217,7 +265,7 @@ const HomePage = () => {
                         <span className="product-price">{data.price} грн.</span>
                         <Button icon="pi pi-shopping-cart" label="Додати в кошик" 
                         onClick={(e)=>onClickAddToCart(e, data.id)} 
-                        disabled={data.inventoryStatus === 'Очікуєм'}></Button>
+                        disabled={data.inventoryStatus === 'Очікуєм' }></Button>
                         <span className={`product-badge status-${data.inventoryStatus.toLowerCase()}`}>{data.inventoryStatus}</span>
                     </div>
                 </div>
@@ -248,7 +296,9 @@ const HomePage = () => {
                     <div className="product-grid-item-bottom">
                         <span className="product-price">{data.price} грн.</span>
                         <Button icon="pi pi-shopping-cart" label="Додати в кошик" onClick={(e)=>onClickAddToCart(e, data.id)} 
-                        disabled={data.inventoryStatus === 'Очікуєм'}></Button>
+                        disabled={data.inventoryStatus === 'Очікуєм' }>
+                            
+                        </Button>
                     </div>
                 </div>
             </div>
@@ -269,7 +319,7 @@ const HomePage = () => {
     const renderHeader = () => {
         return (
             <div className="p-grid p-nogutter" >
-                <div className="p-col-3" style={{textAlign: 'left'}} >
+                <div className="d-none d-sm-block p-col-3" style={{textAlign: 'left'}} >
 
                 <span className="p-input-icon-left">
                     <i className="pi pi-search" />
@@ -278,22 +328,22 @@ const HomePage = () => {
                 </span>
                 </div>
 
-                <div className="p-col-7" style={{textAlign: 'left'}}>
-                    {/* <Dropdown options={sortOptions} value={sortKey} optionLabel="label" placeholder="Sort By Price" onChange={onSortChange}/>
-                <br/><br/> */}
+                <div className="d-sm-none d-none  d-lg-block p-col-7" style={{textAlign: 'center'}}>
+                    
                 <SelectButton value={selected} options={category} onChange={(e) => onChangeCategory(e)} />
-                {/* <MultiSelect value={selected} options={category} 
-                // onChange={(e) => setSelected(e.value)}
-                onChange={(e) =>onChangeCategory(e)}
-                 //optionLabel="name" 
-                 placeholder="Категорія" 
-                 display="chip" 
-                 //maxSelectedLabels={2}
-                 /> */}
+                
             </div>
+              
+
+                 <div className="d-block d-lg-none p-col-7" style={{textAlign: 'right'}}>
+                    <Dropdown value={selectedDropdoun} options={categorys} onChange={(e) => onChangeCategoryDropdoun(e)} optionLabel="name" placeholder="Категорія" editable/> 
+
+
+            </div>
+            
            
                
-                <div className="p-col-2" style={{textAlign: 'right'}}>
+                <div className="d-none d-sm-block p-col-2" style={{textAlign: 'right'}}>
                     <DataViewLayoutOptions layout={layout} onChange={(e) => setLayout(e.value)} />
                 </div>
             </div>
