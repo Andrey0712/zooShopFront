@@ -10,7 +10,7 @@ import { Tooltip } from 'primereact/tooltip';
 import {push} from 'connected-react-router';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css'
-//import { AddCheckOut } from '../../actions/checkOut';
+import validate from './validation'
 import http from "../../http_common";
 import cartService from '../../services/cart.service';
 
@@ -127,7 +127,7 @@ const CheckOut = () => {
                 <Formik
                     innerRef = {refFormik}
                     initialValues={initialValues}
-                    //validationSchema={validate()}
+                    validationSchema={validate()}
                     onSubmit={onHandleSubmit}
                 >
                     <Form>
@@ -149,7 +149,7 @@ const CheckOut = () => {
                             id="consumerSecondName"
                             type="text" />
                   <TextInput
-                            label="Телефон"
+                            label="Телефон (xxx xxxx xxx)"
                             name="consumerPhone"
                             id="consumerPhone"
                             type="text" />

@@ -75,8 +75,10 @@ const onSubmitHandler = async (values) => {
 
 return (
     
-    <div className="row">
+    <div className="row ">
         <div className="offset-md-3 col-md-6">
+         {/* <div className="flex justify-content-center">
+                 <div className="card"> */}
             <h1 ref={titleRef} className="text-center" >Реєстрація</h1>
             {invalid && invalid.length>0 &&
                 <div className="alert alert-danger">
@@ -99,6 +101,7 @@ return (
                 validationSchema={validate()}
                 onSubmit={onSubmitHandler}
             >
+                
                 <Form>
                     <MyTextInput
                         label="Назва товару"
@@ -144,8 +147,9 @@ return (
                         <div className="d-grid gap-2 d-md-flex justify-content-md-end">
                             <button type="submit" className="btn btn-primary">Реєстрація продукта</button>
                         </div>
-                    
-                </Form>
+                       
+                    <br/><br/>
+                </Form> 
             </Formik>
         </div>
 

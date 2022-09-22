@@ -15,7 +15,7 @@ import { useHistory } from "react-router-dom";
 import { DataView, DataViewLayoutOptions } from 'primereact/dataview';
 import OderItemsPage from './orderItems';
 import { setNestedObjectValues } from 'formik';
-
+import { RadioButton } from 'primereact/radiobutton';
 
 const OdersPage = () => {
 
@@ -122,7 +122,7 @@ const OdersPage = () => {
         
         
     }
-   
+    
     const actionBodyTemplate = (rowData) => {
         return (
             <React.Fragment>
@@ -181,7 +181,7 @@ const OdersPage = () => {
                 <DataTable ref={dt} value={list} selection={selected} onSelectionChange={(e) => setSelected(e.value)}
                     dataKey="id" paginator rows={5} rowsPerPageOptions={[5, 10, 25]}
                     paginatorTemplate="FirstPageLink PrevPageLink PageLinks NextPageLink LastPageLink CurrentPageReport RowsPerPageDropdown"
-                    currentPageReportTemplate="Showing {first} to {last} of {totalRecords} products"
+                    currentPageReportTemplate="Відображено з {first} по {last} усього {totalRecords} замовлень"
                     globalFilter={globalFilter} header={header} responsiveLayout="scroll">
                     <Column field="consumerFirstName" header="Ім'я" style={{ minWidth: '6rem' }}></Column>
                     <Column field="consumerSecondName" header="Призвище" style={{ minWidth: '8rem' }}></Column>

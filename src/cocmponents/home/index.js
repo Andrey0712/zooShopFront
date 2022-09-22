@@ -72,10 +72,10 @@ import CartDialog from './cartDialog';
 import { Dialog } from 'primereact/dialog';
 import {urlBackend} from '../../http_common';
 import { InputText } from 'primereact/inputtext';
-import { MultiSelect } from 'primereact/multiselect';
 import { SelectButton } from 'primereact/selectbutton';
 import { toast } from 'react-toastify';
 import { useHistory } from "react-router-dom";
+
 
 const HomePage = () => {
 
@@ -87,13 +87,7 @@ const HomePage = () => {
     const [layout, setLayout] = useState('grid');
     
     const history = useHistory();
-    //const [sortKey, setSortKey] = useState(null);
-    // const [sortOrder, setSortOrder] = useState(null);
-    // const [sortField, setSortField] = useState(null);
-    // const sortOptions = [
-    //     {label: 'Price High to Low', value: '!price'},
-    //     {label: 'Price Low to High', value: 'price'},
-    // ];
+    
 
     const [selected, setSelected] = useState(null);
     const [loading, setLoading] = useState(true);
@@ -253,7 +247,8 @@ const HomePage = () => {
                 <div className="product-list-item">
                 <img src={`${urlBackend}`+data.image} 
                     //<img src={`${data.image}`}  
-                    height="200"  onError={(e) => 
+                    //height="200"  
+                    onError={(e) => 
                         e.target.src='https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} alt={data.name} />
                     <div className="product-list-detail">
                         <div className="product-name">{data.name}</div>
@@ -287,7 +282,8 @@ const HomePage = () => {
                         <span className={`product-badge status-${data.inventoryStatus.toLowerCase()}`}>{data.inventoryStatus}</span>
                     </div>
                     <div className="product-grid-item-content">
-                    <img src={`${urlBackend}`+data.image}  height="200" 
+                    <img src={`${urlBackend}`+data.image}  
+                    //height="200" 
                     onError={(e) => e.target.src='https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} alt={data.name} />
                         <div className="product-name">{data.name}</div>
                         <div className="product-description">{data.description}</div>
@@ -302,6 +298,7 @@ const HomePage = () => {
                     </div>
                 </div>
             </div>
+
         );
     }
 
@@ -314,8 +311,10 @@ const HomePage = () => {
             return renderListItem(product);
         else if (layout === 'grid')
             return renderGridItem(product);
+                    
     }
 
+    
     const renderHeader = () => {
         return (
             <div className="p-grid p-nogutter" >
@@ -346,6 +345,8 @@ const HomePage = () => {
                 <div className="d-none d-sm-block p-col-2" style={{textAlign: 'right'}}>
                     <DataViewLayoutOptions layout={layout} onChange={(e) => setLayout(e.value)} />
                 </div>
+
+                
             </div>
         );
     }
@@ -366,9 +367,9 @@ const HomePage = () => {
             <div className="dataview-demo">
                 <div className="card">
                     <DataView value={list} layout={layout} header={header}
-                        itemTemplate={itemTemplate} paginator rows={6}
-                       
-                         />
+                        itemTemplate={itemTemplate} paginator rows={6}/>
+                                                 
+                        
                 </div>
             </div>
 
