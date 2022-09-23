@@ -31,7 +31,7 @@ const EditProduct = ( ) => {
     const initState = {
         id:productId,
         name: current.name,
-        startPhoto: "http://localhost:5000/"+current.image,
+        startPhoto: urlBackend+current.image,
         //startPhoto: null,
         description: current.description,
         //categoryId: current.category,
