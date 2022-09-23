@@ -101,7 +101,8 @@ const HomePage = () => {
         { name: 'Корм', code: 'Корм' },
         { name: 'Вітаміни', code: 'Вітаміни' },
         { name: 'Іграшки', code: 'Іграшки' },
-        { name: 'Ветеринарні препарати', code: 'Ветеринарні препарати' }
+        { name: 'Ветеринарні препарати', code: 'Ветеринарні препарати' },
+        { name: 'Всі категорії', code: null }
     ];
     
 
@@ -217,7 +218,7 @@ const HomePage = () => {
             // var rez= e.target.value[0].name;  
             // console.log({rez}) 
             var data = {
-                product: e.value.name,
+                product: e.value.code,
                 
             }
             console.log({data},"ffff")
