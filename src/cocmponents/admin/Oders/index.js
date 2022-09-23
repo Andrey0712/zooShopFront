@@ -199,16 +199,7 @@ const OdersPage = () => {
            
 
             
-            {/* <Dialog
-                // header='Dialog'
-                visible={visible}
-                style={{ width: '50vw' }}
-                modal={true}
-                onHide={() => setVisible(false)}
-                maximizable={false}>
-                <OderItemsPage />
-            </Dialog> */}
-            
+                      
                                  
         </div>
         </>
@@ -218,18 +209,3 @@ const OdersPage = () => {
 
  export default OdersPage;
 
-// const OdersPage = () => {
-//     return (
-//       <>
-        
-//           <title>Нічого не знайдено</title>
-        
-//         <h2>Nothing to see here!</h2>
-//         <p>
-//           <Link to="/">Go to the home page</Link>
-//         </p>
-//       </>
-//     );
-// }
-
-// export default OdersPage;

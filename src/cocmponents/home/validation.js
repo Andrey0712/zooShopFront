@@ -8,10 +8,10 @@ const validate=()=>{
             .required("Вкажіть Ім'я"),  
             consumerSecondName: Yup.string().required("Вкажіть призвіще"),
             consumerPhone: Yup.string()
-            .matches(/[0-9 ]{3}[0-9 ]{4}[0-9]{3}/, {
-      message: "Не вірний номер",
-      excludeEmptyString: false,
-    })
+    //         .matches(/[0-9 ]{3}[0-9 ]{4}[0-9]{3}/, {
+    //   message: "Не вірний номер",
+    //   excludeEmptyString: false,
+    // })
     .required("Вкажіть телефон"),
                  
     });

@@ -1,4 +1,4 @@
-import React, {useEffect, useState,
+import React, {useState,
     useRef 
 } from 'react'
 import { Form, Formik } from 'formik';
@@ -6,13 +6,12 @@ import { useSelector,useDispatch } from 'react-redux';
 import TextInput from '../../cocmponents/common/MyTextInput'
 import EclipseWidget from '../../cocmponents/common/louding';
 import { Button } from 'primereact/button';
-import { Tooltip } from 'primereact/tooltip';
 import {push} from 'connected-react-router';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css'
 import validate from './validation'
 import http from "../../http_common";
-import cartService from '../../services/cart.service';
+
 
 const CheckOut = () => {
 
@@ -141,18 +140,22 @@ const CheckOut = () => {
                             label="Ім'я"
                             name="consumerFirstName" 
                             id="consumerFirstName"
-                            type="text" />
+                            type="text" 
+                            placeholder="Обов'язкове поле"
+                            />
                   
                   <TextInput
                             label="Прізвище"
                             name="consumerSecondName"
                             id="consumerSecondName"
-                            type="text" />
+                            type="text" 
+                            placeholder="Обов'язкове поле"/>
                   <TextInput
-                            label="Телефон (xxx xxxx xxx)"
+                            label="Телефон"
                             name="consumerPhone"
                             id="consumerPhone"
-                            type="text" />
+                            type="text" 
+                            placeholder="+380xxxxxxxxx"/>
                             </div>
                           {/* </div>
                         </div> */}
@@ -167,20 +170,22 @@ const CheckOut = () => {
                             label="Область"
                             name="region" 
                             id="region"
-                            type="text" />
+                            type="text" 
+                            placeholder="Не обов'язкове поле"/>
                   
                   <TextInput
                             label="Місто"
                             name="city"
                             id="city"
-                            type="text" />
+                            type="text" 
+                            placeholder="Не обов'язкове поле"/>
                   <TextInput
                             label="Поштове відділеня"
                             name="postOffice"
                             id="postOffice"
-                            type="text" />
-                             {/* </div>
-                          </div> */}
+                            type="text" 
+                            placeholder="Не обов'язкове поле"/>
+                            
                         </div>
                         </div>
         <hr />
