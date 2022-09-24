@@ -146,9 +146,9 @@ const HomePage = () => {
         }}
         else
         {
-            toast.error ("Ви не зареєстровані",{position: toast.POSITION.TOP_RIGHT, autoClose:2000});
+            toast.error ("Ви не авторизовані",{position: toast.POSITION.TOP_RIGHT, autoClose:2000});
             
-        history.push("/register");
+        history.push("/login");
     }
 
     }
