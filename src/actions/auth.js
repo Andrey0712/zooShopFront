@@ -11,7 +11,7 @@ import { getCartUser } from "./cart";
 
 export const RegisterUser = (model) => async (dispatch) => {
     //const history = useHistory();
-
+    console.log("register2", model);
     try {
         dispatch({type: REGISTER_BEGIN});
         const result = await authService.register(model);
