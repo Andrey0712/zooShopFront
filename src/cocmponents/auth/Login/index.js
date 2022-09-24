@@ -299,10 +299,10 @@ const LoginPage = () => {
     const passwordFooter = (
         <React.Fragment>
             <Divider />
-            <p className="mt-0">Поради</p>
+            {/* <p className="mt-0">Поради</p> */}
             <ul className="pl-2 ml-1 mt-0" style={{ lineHeight: '1.5' }}>
                 <li>Мінімум 5 латинських символів</li>
-                <li>Xочаб одна цифра</li>
+                <li>Мінімум одна цифра</li>
             </ul>
         </React.Fragment>
     );
