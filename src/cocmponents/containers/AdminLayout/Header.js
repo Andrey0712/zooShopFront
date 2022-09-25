@@ -29,7 +29,7 @@ const HeaderAdmin = () => {
                             
                         </li>
                         <li className="nav-item">
-                            <Link className="nav-link active" aria-current="page" to="/admin/oderlist">Замовленя</Link>
+                            <Link className="nav-link active" aria-current="page" to="/admin/oderlist">Замовлення</Link>
                             
                         </li>
                         <li className="nav-item">

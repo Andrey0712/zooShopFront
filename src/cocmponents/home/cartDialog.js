@@ -164,12 +164,12 @@ const CartDialog = () => {
                 <thead className="table table-bordered">
                     <tr>
                     {/* <th scope="col">ID</th> */}
-                        <th scope="col">Image</th>
-                        <th scope="col">Name</th>
-                        <th scope="col">Price</th>
-                        <th scope="col">Quantity</th>
-                        <th scope="col">Suma</th>
-                        <th scope="col">Action</th>
+                        <th scope="col">Фото</th>
+                        <th scope="col">Назва</th>
+                        <th scope="col">Ціна</th>
+                        <th scope="col">Кількість</th>
+                        <th scope="col">Вартість</th>
+                        <th scope="col">Дії</th>
                     </tr>
                 </thead>
 

@@ -315,7 +315,10 @@ const LoginPage = () => {
             <Dialog visible={showMessage} onHide={() => setShowMessage(false)} position="top" footer={dialogFooter} showHeader={false} breakpoints={{ '960px': '80vw' }} style={{ width: '30vw' }}>
                 <div className="flex align-items-center flex-column pt-6 px-3">
                     <i className="pi pi-undo" style={{ fontSize: '5rem', color: 'var(--blue-500)' }}></i>
-                    <br/><h5>Помилка авторизациї!</h5>
+                    <div className="flex justify-content-center">
+                        <br/><h4>Помилка авторизациї!</h4>
+                    <br/><h5>Якщо Ви не зареєстрованний користувач - перейдіть на вкладку реєстрація!</h5>
+                    </div>
                     
                 </div>
             </Dialog>

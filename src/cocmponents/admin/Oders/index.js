@@ -145,7 +145,7 @@ const OdersPage = () => {
 
     const header = (
         <div className="table-header">
-            <h5 className="mx-0 my-1">Панель керування замовленями</h5>
+            <h5 className="mx-0 my-1">Панель керування замовленнями</h5>
             <span className="p-input-icon-left">
                 <i className="pi pi-search" />
                 <InputText type="search" onInput={(e) => setGlobalFilter(e.target.value)} placeholder="Пошук..." />
@@ -188,10 +188,10 @@ const OdersPage = () => {
                     <Column field="consumerPhone" header="Телефон" sortable style={{ minWidth: '8rem' }} ></Column>
                     <Column field="region" header="Регіон" sortable style={{ minWidth: '10rem' }} ></Column>
                     <Column field="city" header="Місто" sortable style={{ minWidth: '8rem' }}></Column>
-                    <Column field="postOffice" header="Поштове відділеня" sortable style={{ minWidth: '12rem' }}></Column>
-                    <Column field="statusName" header="Статус замовленя" sortable style={{ minWidth: '8rem' }}></Column>
-                    <Column header="Зміна статусу замовленя" body={actionBodyTemplate} exportable={false} style={{ minWidth: '10rem' }}></Column>
-                    <Column header="Замовленя" body={actionBodyOdersItem} exportable={false} style={{ minWidth: '4rem' }}></Column>
+                    <Column field="postOffice" header="Поштове відділення" sortable style={{ minWidth: '12rem' }}></Column>
+                    <Column field="statusName" header="Статус замовлення" sortable style={{ minWidth: '8rem' }}></Column>
+                    <Column header="Зміна статусу замовлення" body={actionBodyTemplate} exportable={false} style={{ minWidth: '10rem' }}></Column>
+                    <Column header="Товари" body={actionBodyOdersItem} exportable={false} style={{ minWidth: '4rem' }}></Column>
                 </DataTable>
 
                 
