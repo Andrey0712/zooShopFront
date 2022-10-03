@@ -11,7 +11,7 @@ import {push} from 'connected-react-router';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css'
 import { RegisterProd } from '../../../actions/RegisterProduct';
-
+import SelectInput from '../../common/MySelectField'
 
 toast.configure();
 
@@ -39,7 +39,7 @@ const RegisterProduct = () => {
 
 
 const onSubmitHandler = async (values) => {
-    
+    console.log("onSubmitHandler", values);
     console.log("errors", errors);
     try {            
         const formData = new FormData();
@@ -72,6 +72,15 @@ const onSubmitHandler = async (values) => {
         console.log("Server is bad register from", errors);
     }
 }
+
+
+const options = [
+    { value: 1, label: 'Корм'},
+    { value: 2, label: 'Вітаміни'},
+    { value: 3, label: 'Іграшки'},
+    { value: 4, label: 'Ветеринарні препарати'}
+      ]
+
 
 return (
     
@@ -125,12 +134,35 @@ return (
                         id="description"
                         type="text" />
 
-                    <MyTextInput
+                    {/* <MyTextInput
                         label="Категорія"
                         name="categoryId" 
                         id="categoryId"
-                        type="text" />
+                        type="text" /> */}
 
+
+                   
+                     <SelectInput name="categoryId" label="Категорія" >
+                      {options.map((option) => (
+                      <option key={option.value} value={option.value} >
+                      {option.label}
+                      
+                         </option>
+                       ))}
+                       
+                          </SelectInput>`
+                        
+                          {/* <label htmlFor="categoryId">Категорія</label>
+                            <span className="p-float-label">
+                            
+                                <Dropdown
+                            id="categoryId" name="categoryId" 
+                            value={selectedDropdoun} 
+                            options={categorys} 
+                            onChange={onCategoryChange}
+                             optionLabel="name" placeholder="Категорія" editable/>
+                            </span> */}
+                            
                     <MyTextInput
                         label="Кількість"
                         name="quantity"
