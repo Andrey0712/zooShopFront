@@ -152,17 +152,7 @@ return (
                        
                           </SelectInput>`
                         
-                          {/* <label htmlFor="categoryId">Категорія</label>
-                            <span className="p-float-label">
-                            
-                                <Dropdown
-                            id="categoryId" name="categoryId" 
-                            value={selectedDropdoun} 
-                            options={categorys} 
-                            onChange={onCategoryChange}
-                             optionLabel="name" placeholder="Категорія" editable/>
-                            </span> */}
-                            
+                                                     
                     <MyTextInput
                         label="Кількість"
                         name="quantity"

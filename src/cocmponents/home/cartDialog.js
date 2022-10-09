@@ -17,7 +17,10 @@ import {
  //import jsPDF from 'jspdf'
  //import autoTable from 'jspdf-autotable'
  import { getCartUser} from '../../actions/cart';
+ import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css'
 
+ toast.configure();
 
 const CartDialog = () => {
 
@@ -27,6 +30,9 @@ const CartDialog = () => {
     const history = useHistory();
     const { list } = useSelector(state => state.cart);
     const [loading, setLoading] = useState(true);
+    // const [qqq, setqqq] = useState(null);
+    console.log("list",list);
+    //console.log("qqq",qqq);
     
 
     
@@ -64,18 +70,23 @@ const CartDialog = () => {
 
     }
 
-    
-    
+       
     const onClickPlus = (e) => {
         e.preventDefault();
         const id=e.target.id;
+        //const count= e.quantity;
         console.log("productId",id);
+        //console.log("count",count);
+
+        //if()
         try {            
             var data = {
                 productId: id
                 
-                //quantity: 1
+                //quantity: count
             }
+            console.log("data",data);
+            
             dispatch(PlusProd(data))
                 .then(() => {
                     setVisible(true);
@@ -83,6 +94,20 @@ const CartDialog = () => {
                     history.push("/cart");
                 })
                 .catch(ex => {
+
+                    toast.error('Нажаль, ця товарна позиція закінчилась.', {
+                        position: "top-center",
+                        autoClose: 3000,
+                        hideProgressBar: false,
+                        closeOnClick: true,
+                        pauseOnHover: true,
+                        draggable: true,
+                        progress: undefined,
+                        });
+
+
+                    // toast.warn ("ПЕРЕБОР",{position: toast.POSITION.BOTTOM_RIGHT,autoClose:5000});
+                    console.log("ПЕРЕБОР ");
                 });
         }
         catch (error) {
@@ -147,10 +172,13 @@ const CartDialog = () => {
        
 
     return (
+
+        
        
          <div className="row">
             <div className="offset-md-2 col-md-6">
             <br/>
+
                 <h1 className="text-center" >Кошик</h1>
 
                  <Tooltip target=".export-buttons>button" position="bottom" />
@@ -188,6 +216,7 @@ const CartDialog = () => {
                             <td>{item.productName}</td>
                             <td> {item.productPrice} грн.</td>
                             <td> {item.quantity} </td>
+                            {/* <td> {item.quantityOll} </td> */}
                             <td> {item.quantity*item.productPrice} грн. </td>
                             
                             <i className="fa fa-trash-o text-danger fa-2x" id={item.id} 
