@@ -130,6 +130,16 @@ const CartDialog = () => {
                     history.push("/cart");
                 })
                 .catch(ex => {
+
+                    toast.error('Ця товарна позиція залишилась у кошику в одному екземплярі. ', {
+                        position: "top-center",
+                        autoClose: 3000,
+                        hideProgressBar: false,
+                        closeOnClick: true,
+                        pauseOnHover: true,
+                        draggable: true,
+                        progress: undefined,
+                        });
                 });
         }
         catch (error) {
