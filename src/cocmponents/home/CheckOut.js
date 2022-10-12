@@ -80,6 +80,7 @@ const CheckOut = () => {
            const formData = new FormData();
            Object.entries(values).forEach(([key, value]) => formData.append(key, value));
             console.log("onHandleSubmit----------",values);
+            console.log("onHandleSubmit---------111",initialValues.orderItems);
     const result = await http.post("/api/orders/add", values);
     setLoading(false);
                    toast.warn ("Замовленя оформлено",{position: toast.POSITION.BOTTOM_RIGHT,autoClose:3000});
