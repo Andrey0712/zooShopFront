@@ -9,6 +9,8 @@ const NoMatch = () => {
         <p>
           <Link to="/">Go to the home page</Link>
         </p>
+
+        
       </>
     );
 }
