@@ -69,8 +69,9 @@
 
 .dataview-demo .product-grid-item {
   margin: 0.5em;
-  border: 1px solid #dee2e6;
+  border: 1px solid #5a7086;
   padding: 2rem;
+  background: #dcdfe1;
 }
 
 .dataview-demo .product-grid-item .product-grid-item-top,
@@ -100,6 +101,11 @@
 
 .dataview-demo .product-grid-item .product-grid-item-content {
   text-align: center;
+  /* background: #e5e7e9; */
+}
+
+.dataview-demo .product-grid-item .product-grid-item-content .p-rating {
+  margin-bottom: 0.5rem;
 }
 
 .dataview-demo .product-grid-item .product-price {
@@ -151,4 +157,23 @@
 
 .dialog-demo .p-dialog .p-button {
   min-width: 6rem;
+}
+
+.p-dataview .p-dataview-content {
+  background-image: url("https://picsum.photos/id/130/1000");
+  background-color: #cccccc; /* Used if the image is unavailable */
+  /* height: 500px; You must set a specified height */
+  background-position: center; /*Center the image */
+  background-repeat: no-repeat; /* Do not repeat the image */
+  background-size: cover; /* Resize the background image to cover the entire container */
+  /* padding: 20px 20px 20px 20px; */
+  margin-top: 1%;
+  margin-bottom: 1%;
+}
+
+.p-paginator {
+  background: #c0c3c5;
+}
+.p-dataview .p-dataview-header {
+  background: #c0c3c5;
 }
