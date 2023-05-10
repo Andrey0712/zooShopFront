@@ -113,6 +113,7 @@ const HomePage = () => {
 
   const onClickAddToCart = (e, id) => {
     e.preventDefault();
+
     if (auth.isAuth) {
       try {
         var data = {
@@ -229,10 +230,12 @@ const HomePage = () => {
           </div>
           <div className="product-list-action">
             <span className="product-price">{data.price} грн.</span>
+
             <Button
               icon="pi pi-shopping-cart"
               label="Додати в кошик"
               onClick={(e) => onClickAddToCart(e, data.id)}
+              // onClick={() => fff()}
               disabled={data.inventoryStatus === "Очікуєм"}
             ></Button>
             <span
@@ -279,10 +282,17 @@ const HomePage = () => {
             <span className="product-price">{data.price} грн.</span>
             <Button
               icon="pi pi-shopping-cart"
-              label="Додати в кошик"
+              className="p-button-rounded npm-icon-container npm-icon is_animating"
               onClick={(e) => onClickAddToCart(e, data.id)}
               disabled={data.inventoryStatus === "Очікуєм"}
             ></Button>
+
+            {/* <Button
+              icon="pi pi-shopping-cart"
+              label="Додати в кошик"
+              onClick={(e) => onClickAddToCart(e, data.id)}
+              disabled={data.inventoryStatus === "Очікуєм"}
+            ></Button> */}
           </div>
         </div>
       </div>

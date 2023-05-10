@@ -30,18 +30,18 @@
 
 .dataview-demo .product-list-item {
   display: flex;
-  align-items: center;
+  /* align-items: center; */
   padding: 1rem;
   width: 100%;
 }
 
 .dataview-demo .product-list-item img {
-  /* width: 150px; */
-  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
-  /* margin-right: 2rem; */
+  width: 150px;
+  margin-right: 2rem;
   border-radius: 80%;
-  width: 90%;
-  margin: auto;
+  /* width: 90%;
+  margin: auto;*/
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
 }
 
 .dataview-demo .product-list-item .product-list-detail {
@@ -78,11 +78,15 @@
 .dataview-demo .product-grid-item .product-grid-item-top,
 .dataview-demo .product-grid-item .product-grid-item-bottom {
   display: flex;
+  flex-wrap: wrap;
+  max-width: 100%;
   align-items: center;
   justify-content: space-between;
 }
 
 .dataview-demo .product-grid-item {
+  /* display: flex;
+  flex-direction: column; */
   border-radius: 2em;
   text-align: center;
   padding: 1em;
@@ -103,6 +107,7 @@
 
 .dataview-demo .product-grid-item .product-grid-item-content {
   text-align: center;
+  flex: 1 1 auto;
   /* background: #e5e7e9; */
 }
 
@@ -115,11 +120,17 @@
   font-weight: 600;
 }
 
-.dataview-demo .product-grid-item .product-grid-item-bottom .p-button:hover {
-  -webkit-transform: scale(1.2);
-  -ms-transform: scale(1.2);
-  transform: scale(1.2);
+.dataview-demo .product-grid-item .product-grid-item-bottom {
+  display: flex;
+  justify-content: space-between;
+  font-size: 1.5rem;
+  font-weight: 600;
 }
+
+/* .dataview-demo .product-grid-item .product-grid-item-bottom .p-button {
+  
+  align-content: flex-end;
+} */
 
 @media screen and (max-width: 576px) {
   .dataview-demo .product-list-item {
